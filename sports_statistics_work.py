@@ -31,8 +31,18 @@ cursor.execute("INSERT INTO players_table VALUES ('Artstyle', 'Natus Vincere', 5
 
 # Alliance
 cursor.execute("INSERT INTO players_table VALUES ('Loda', 'Alliance', 1, 0000, 'Juggernaut', '66.19%');")
+cursor.execute("INSERT INTO players_table VALUES ('s4', 'Alliance', 2, 8086, 'Puck', '68.14%');")
+cursor.execute("INSERT INTO players_table VALUES ('AdmiralBulldog', 'Alliance', 3, 7543, 'Lone Druid', '65.48%');")
+cursor.execute("INSERT INTO players_table VALUES ('EGM', 'Alliance', 4, 7019, 'Io', '61.05%');")
+cursor.execute("INSERT INTO players_table VALUES ('Akke', 'Alliance', 5, 0000, 'Chen', '63.13%');")
 
 # Newbee
+cursor.execute("INSERT INTO players_table VALUES ('Hao', 'Newbee', 1, 7268, 'Gyrocopter', '69.87%');")
+cursor.execute("INSERT INTO players_table VALUES ('mu', 'Newbee', 2, 7371, 'Dragon Knight', '70.85');")
+cursor.execute("INSERT INTO players_table VALUES ('kpii', 'Newbee', 3, 7747, 'Naga Siren', '73.54%');")
+cursor.execute("INSERT INTO players_table VALUES ('ChuaN', 'Newbee', 4, 0000', 'Disruptor', '67.04%');")
+cursor.execute("INSERT INTO players_table VALUES ('Kaka', 'Newbee', 5, 8349, 'Io', '61.89%');")
+
 
 # Evil Geniuses
 cursor.execute("INSERT INTO players_table VALUES ('Aui_2000', 'Evil Geniuses', 1, 7628, 'Morphling', '72.70%');")
