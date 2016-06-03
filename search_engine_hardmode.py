@@ -95,13 +95,56 @@ def insert_new_player():
         break
 
 
+def update_user():
+    while True:
+        print('Enter "e" to exit.')
+        user_search = input("""Who's information would you like to change?
+               Enter username:   """)
+        match_found = []
+        if user_search == 'e':
+            break
+        for row in table_list:
+            if user_search in row:
+                match_found.append(row)
+        if len(match_found) < 1:
+            print('User not found.')
+        else:
+            print('User found:')
+            print(match_found)
+            information_to_update = input("""What would you like to update?
+                    (t) - Current Team
+                    (p) - Position
+                    (m) - MMR
+                    (h) - Main Hero
+                    (w) - Pub Winrate\n""").lower()
+            if information_to_update == 't':
+                new_team = input('Enter new team: ')
+            if information_to_update == 'p':
+                new_position = input('Enter new position: ')
+                possible_numbers = ['1', '2', '3', '4', '5']
+                while new_position not in possible_numbers:
+                    new_position = input('Enter new position: ')
+                new_position = int(new_position)
+            if information_to_update == 'm':
+                new_mmr = input('Enter new MMR: ')
+                while len(new_mmr) > 4:
+                    new_mmr = input('Enter new MMR: ')
+                new_mmr = int(new_mmr)
+            if information_to_update == 'h':
+                new_hero = input('Enter new main hero: ')
+            if information_to_update == 'w':
+                new_winrate = input('Enter new winrate: ')
+
+
 def search_engine():
     while True:
         search = 's'
         input_new_user = 'i'
+        update_user_information = 'u'
         operation = input('''What would you like to do?
                 (s) - Search for player
                 (i) - Input new Player
+                (u) - Update player information
                 (e) - Exit\n''').lower()
         if operation == search:
             while True:
@@ -113,8 +156,7 @@ def search_engine():
             (u) - Username
             (t) - Current Team
             (m) - MMR
-            (e) - exit
-            ''').lower()
+            (e) - exit\n''').lower()
                 if question == player_name:
                     search_username()
                 elif question == team:
@@ -125,10 +167,14 @@ def search_engine():
                     break
         if operation == input_new_user:
             insert_new_player()
+        if operation == update_user_information:
+            update_user()
         if operation == 'e':
             break
 
 
+search_engine()
+'''
 def sort_by_mmr():
     connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
     cursor = connection.cursor()
@@ -139,3 +185,4 @@ def sort_by_mmr():
     cursor.close()
     connection.close()
 search_engine()
+'''
