@@ -52,12 +52,11 @@ def search_team():
 def search_mmr():
     while True:
         mmr_search = input('Search for MMR: ')
-        mmr_search = int(mmr_search)
         mmr_match = []
         for row in table_list:
             print(row)
             print(mmr_search)
-            if mmr_search in row:
+            if mmr_search in str(row[3]):
                 mmr_match.append(row)
         if len(mmr_match) < 1:
             print('No matches found.')
