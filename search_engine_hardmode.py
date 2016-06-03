@@ -123,9 +123,19 @@ def search_engine():
                     search_mmr()
                 else:
                     break
-        elif operation == input_new_user:
+        if operation == input_new_user:
             insert_new_player()
-        elif operation == 'e':
+        if operation == 'e':
             break
 
+
+def sort_by_mmr():
+    connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
+    cursor = connection.cursor()
+    cursor.execute('SELECT * from players_table;')
+    cursor.execute('ORDER BY mmr DESC;')
+    new_table = cursor.fetchall()
+    connection.commit()
+    cursor.close()
+    connection.close()
 search_engine()
