@@ -24,7 +24,7 @@ cursor.execute("INSERT INTO players_table VALUES ('pieliedie', 'Team Secret', 5,
 
 # Natus Vincere
 cursor.execute("INSERT INTO players_table VALUES ('Ditya Ra', 'Natus Vincere', 1, 7245, 'Ember Spirit', '57.86%');")
-cursor.execute("INSERT INTO players_table VALUES ('Dendi', 'Natus Vincere' 2, 7128, 'Pudge', '56.59%');")
+cursor.execute("INSERT INTO players_table VALUES ('Dendi', 'Natus Vincere', 2, 7128, 'Pudge', '56.59%');")
 cursor.execute("INSERT INTO players_table VALUES ('GeneRal', 'Natus Vincere', 3, 6930, 'Shadow Fiend', '53.83%');")
 cursor.execute("INSERT INTO players_table VALUES ('SoNNeikO', 'Natus Vincere', 4, 8075, 'Io', '53.99%');")
 cursor.execute("INSERT INTO players_table VALUES ('Artstyle', 'Natus Vincere', 5, 0000, 'Chen', '58.82%');")
@@ -40,7 +40,7 @@ cursor.execute("INSERT INTO players_table VALUES ('Akke', 'Alliance', 5, 0000, '
 cursor.execute("INSERT INTO players_table VALUES ('Hao', 'Newbee', 1, 7268, 'Gyrocopter', '69.87%');")
 cursor.execute("INSERT INTO players_table VALUES ('mu', 'Newbee', 2, 7371, 'Dragon Knight', '70.85');")
 cursor.execute("INSERT INTO players_table VALUES ('kpii', 'Newbee', 3, 7747, 'Naga Siren', '73.54%');")
-cursor.execute("INSERT INTO players_table VALUES ('ChuaN', 'Newbee', 4, 0000', 'Disruptor', '67.04%');")
+cursor.execute("INSERT INTO players_table VALUES ('ChuaN', 'Newbee', 4, 0000, 'Disruptor', '67.04%');")
 cursor.execute("INSERT INTO players_table VALUES ('Kaka', 'Newbee', 5, 8349, 'Io', '61.89%');")
 
 
@@ -51,6 +51,8 @@ cursor.execute("INSERT INTO players_table VALUES ('BuLba', 'Evil Geniuses', 3, 7
 cursor.execute("INSERT INTO players_table VALUES ('Fear', 'Evil Geniuses', 4, 6587, 'Enigma', '60.15%');")
 cursor.execute("INSERT INTO players_table VALUES ('ppd', 'Evil Geniuses', 5, 7512, 'Treant Protector', '56.10%');")
 
+# cursor.execute("INSERT INTO players_table VALUES(%s, %s, %s, %s, %s, %s);"),
+# (name, team, position, mmr, main, winrate)
 connection.commit()
 # close connection and cursor
 cursor.close()
