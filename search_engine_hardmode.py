@@ -10,6 +10,20 @@ connection.close()
 table_list = list(table)
 table_no_decimal = []
 
+# Check input for letters
+
+
+def int_check(string_to_check):
+    try:
+        int(string_to_check)
+        return True
+    except ValueError:
+        return False
+
+
+#  Search functions
+# __________________________________________________________________
+
 
 def search_username():
     while True:
@@ -68,7 +82,9 @@ def search_mmr():
         if exit_results == 'e':
             break
 
+
 # Insert new player into database
+# ____________________________________________
 
 
 def insert_new_player():
@@ -95,6 +111,10 @@ def insert_new_player():
         break
 
 
+# Update functions
+# _______________________________________________________
+
+
 def update_user():
     while True:
         print('Enter "e" to exit.')
@@ -119,12 +139,29 @@ def update_user():
                     (w) - Pub Winrate\n""").lower()
             if information_to_update == 't':
                 new_team = input('Enter new team: ')
+                if len(new_team) > 30:
+                    new_team = input('Enter new team: ')
+                connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
+                cursor = connection.cursor()
+                # Error for collumn being returned here
+                cursor.execute("UPDATE players_table SET team = new_team where name = user_search")
+                connection.commit()
+                cursor.close()
+                connection.close
+                print('User information updated.')
             if information_to_update == 'p':
                 new_position = input('Enter new position: ')
-                possible_numbers = ['1', '2', '3', '4', '5']
-                while new_position not in possible_numbers:
-                    new_position = input('Enter new position: ')
-                new_position = int(new_position)
+                possible_numbers = [1, 2, 3, 4, 5]
+                value_check = int_check(new_position)
+                if value_check:
+                    new_position = int(new_position)
+                    while new_position not in possible_numbers:
+                        new_position = input('Enter new position: ')
+                        int_or_not = int_check(new_position)
+                        if int_or_not:
+                            new_position = int(new_position)
+                else:
+                    print('Please enter a numeric value.')
             if information_to_update == 'm':
                 new_mmr = input('Enter new MMR: ')
                 while len(new_mmr) > 4:
@@ -134,6 +171,10 @@ def update_user():
                 new_hero = input('Enter new main hero: ')
             if information_to_update == 'w':
                 new_winrate = input('Enter new winrate: ')
+
+
+# Main game function
+# ___________________________________________________________________
 
 
 def search_engine():
@@ -184,5 +225,4 @@ def sort_by_mmr():
     connection.commit()
     cursor.close()
     connection.close()
-search_engine()
 '''
