@@ -148,7 +148,7 @@ def update_user():
                 connection.commit()
                 cursor.close()
                 connection.close()
-                print('User information updated.')
+                print('Team updated.')
             if information_to_update == 'p':
                 new_position = input('Enter new position: ')
                 possible_numbers = [1, 2, 3, 4, 5]
@@ -157,21 +157,56 @@ def update_user():
                     new_position = int(new_position)
                     while new_position not in possible_numbers:
                         new_position = input('Enter new position: ')
-                        int_or_not = int_check(new_position)
-                        if int_or_not:
+                        second_check = int_check(new_position)
+                        if second_check:
                             new_position = int(new_position)
+                    connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
+                    cursor = connection.cursor()
+                    cursor.execute("UPDATE players_table SET team = %s WHERE name = %s;", (new_position, user_search))
+                    connection.commit()
+                    cursor.close()
+                    connection.close()
+                    print('Position updated.')
                 else:
                     print('Please enter a numeric value.')
             if information_to_update == 'm':
                 new_mmr = input('Enter new MMR: ')
-                while len(new_mmr) > 4:
+                while len(new_mmr) > 5:
                     new_mmr = input('Enter new MMR: ')
-                new_mmr = int(new_mmr)
+                check_num = int_check(new_mmr)
+                if check_num:
+                    new_mmr = int(new_mmr)
+                    connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
+                    cursor = connection.cursor()
+                    cursor.execute("UPDATE players_table SET mmr = %s where name = %s;", (new_mmr, user_search))
+                    connection.commit()
+                    cursor.close()
+                    connection.close()
+                    print('MMR Updated')
+                else:
+                    print('Please enter a numerical value')
             if information_to_update == 'h':
                 new_hero = input('Enter new main hero: ')
+                while len(new_hero) > 30:
+                    new_hero = input('Enter a new main hero under thirty letters: ')
+                connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
+                cursor = connection.cursor()
+                cursor.execute("UPDATE players_table SET main = %s where name = %s;", (new_hero, user_search))
+                connection.commit()
+                cursor.close()
+                connection.close()
+                print('Main Hero Updated')
             if information_to_update == 'w':
                 new_winrate = input('Enter new winrate: ')
-
+                while len(new_winrate) > 7:
+                    new_winrate = input('Please only enter 7 characters: ')
+                connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
+                cursor = connection.cursor()
+                cursor.execute("UPDATE players_table SET winrate = %s where name = %s", (new_winrate, user_search))
+                connection.commit()
+                cursor.close()
+                connection.close()
+                print('Winrate Updated')
 
 # Main game function
 # ___________________________________________________________________
