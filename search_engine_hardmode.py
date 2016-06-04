@@ -144,10 +144,10 @@ def update_user():
                 connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
                 cursor = connection.cursor()
                 # Error for collumn being returned here
-                cursor.execute("UPDATE players_table SET team = 'new_team' WHERE name = 'user_search'")
+                cursor.execute("UPDATE players_table SET team = %s WHERE name = %s;", (new_team, user_search))
                 connection.commit()
                 cursor.close()
-                connection.close
+                connection.close()
                 print('User information updated.')
             if information_to_update == 'p':
                 new_position = input('Enter new position: ')
