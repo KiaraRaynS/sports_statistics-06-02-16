@@ -68,8 +68,6 @@ def search_mmr():
         mmr_search = input('Search for MMR: ')
         mmr_match = []
         for row in table_list:
-            print(row)
-            print(mmr_search)
             if mmr_search in str(row[3]):
                 mmr_match.append(row)
         if len(mmr_match) < 1:
@@ -208,6 +206,46 @@ def update_user():
                 connection.close()
                 print('Winrate Updated')
 
+# Sorty by keyword function
+# ______________________________________________________________________________________
+
+
+def sort_by_keyword():
+    while True:
+        sort_prompt = input("""What would you like the charts sorted by?
+                (e) or enter will exit
+                (m) - MMR
+                (w) - Winrate\n""")
+        if sort_prompt == 'm':
+            connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
+            cursor = connection.cursor()
+            cursor.execute("SELECT * from players_table ORDER BY mmr DESC;")
+            new_table = cursor.fetchall()
+            connection.commit()
+            cursor.close()
+            connection.close()
+            start = 0
+            while start < 10:
+                for row in new_table:
+                    print(row)
+                    start += 1
+        elif sort_prompt == 'w':
+            connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
+            cursor = connection.cursor()
+            cursor.execute("SELECT * from players_table ORDER BY winrate DESC;")
+            new_table = cursor.fetchall()
+            connection.commit()
+            cursor.close()
+            connection.close()
+            start = 0
+            while start < 10:
+                for row in new_table:
+                    print(row)
+                    start += 1
+        elif sort_prompt == 'e':
+            break
+
+
 # Main game function
 # ___________________________________________________________________
 
@@ -215,10 +253,12 @@ def update_user():
 def search_engine():
     while True:
         search = 's'
+        sort_users = 'o'
         input_new_user = 'i'
         update_user_information = 'u'
         operation = input('''What would you like to do?
                 (s) - Search for player
+                (o) - Sort users by MMR or Winrate
                 (i) - Input new Player
                 (u) - Update player information
                 (e) - Exit\n''').lower()
@@ -245,6 +285,8 @@ def search_engine():
             insert_new_player()
         if operation == update_user_information:
             update_user()
+        if operation == sort_users:
+            sort_by_keyword()
         if operation == 'e':
             break
 
@@ -252,12 +294,5 @@ def search_engine():
 search_engine()
 '''
 def sort_by_mmr():
-    connection = psycopg2.connect('dbname=sports_statistics user=gingeredmink')
-    cursor = connection.cursor()
-    cursor.execute('SELECT * from players_table;')
-    cursor.execute('ORDER BY mmr DESC;')
-    new_table = cursor.fetchall()
-    connection.commit()
-    cursor.close()
-    connection.close()
+
 '''
